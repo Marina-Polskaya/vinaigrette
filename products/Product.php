@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * продукт
+ */
+interface Product {
+
+    
+    
+}
