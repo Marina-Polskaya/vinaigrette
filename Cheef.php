@@ -6,7 +6,6 @@ require_once __DIR__.'/Vinaigrette.php';
  * Повар
  */
 class Cheef {
-    
     /**
      * Готовить винегрет
      * 
@@ -17,6 +16,7 @@ class Cheef {
      * @return \Vinaigrette
      */
     public function cook($products) : Vinaigrette {
+
         $washedProducts = $this->wash($products);
         $freshProducts = $this->filterFresh($washedProducts);
         $cleanedProducts = $this->cleanOut($freshProducts);
@@ -24,17 +24,31 @@ class Cheef {
         /**
          * .... Повар должен порезать, добавить майонез и смешать
          */
+        $cutedProducts = $this->cut($cleanedProducts);
+
+        $WithMayo = $this->addMayo($cutedProducts);
         
+        $mixedProducts = $this->mix($WithMayo);
+
+
+        $newVinaigrette = new Vinaigrette();
+        $newVinaigrette->composition = $mixedProducts;
+        echo "<pre>";
+        print_r($newVinaigrette->composition);
+        echo "</pre>";
         
-        
-        return new Vinaigrette(); 
+        // return new Vinaigrette(); 
+        return $newVinaigrette;
     }
     
     /**
      * Резать
      */
-    protected function cut($products) {
-        
+    protected function cut($products) : array {
+        foreach($products as $vegetable) {
+            $vegetable->isCuted = true;
+        }
+        return $products;
     }
     
     /**
@@ -45,7 +59,14 @@ class Cheef {
      * @return [];
      */
     protected function mix($products) : array {
-        
+        shuffle($products);
+    
+        return $products;
+    }
+
+    protected function addMayo($products) {
+
+        $products[] = new Mayo();
         return $products;
     }
     

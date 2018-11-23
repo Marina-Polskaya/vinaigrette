@@ -41,6 +41,8 @@ abstract class Vegetable implements Product {
         $this->isClean = $isClean;
         $this->isFresh = $isFresh;
         $this->isCleanOut = $isCleanOut;
+        
+
     }
     
 }
