@@ -15,9 +15,9 @@ class Cheef {
      * @param type $products
      * @return \Vinaigrette
      */
-    public function cook($products) : Vinaigrette {
+    public function cook($vegitables, Flavouring $flavouring) : Vinaigrette {
 
-        $washedProducts = $this->wash($products);
+        $washedProducts = $this->wash($vegitables);
         $freshProducts = $this->filterFresh($washedProducts);
         $cleanedProducts = $this->cleanOut($freshProducts);
         
@@ -25,19 +25,15 @@ class Cheef {
          * .... Повар должен порезать, добавить майонез и смешать
          */
         $cutedProducts = $this->cut($cleanedProducts);
-
-        $WithMayo = $this->addMayo($cutedProducts);
-        
-        $mixedProducts = $this->mix($WithMayo);
-
-
         $newVinaigrette = new Vinaigrette();
-        $newVinaigrette->composition = $mixedProducts;
-        echo "<pre>";
-        print_r($newVinaigrette->composition);
-        echo "</pre>";
         
-        // return new Vinaigrette(); 
+        // $mixedProducts = $this->mix($WithMayo);
+
+        $newVinaigrette->flavouring = $flavouring;
+        $mixedProducts = $this->mix($cutedProducts);
+        $newVinaigrette->composition = $mixedProducts;
+
+
         return $newVinaigrette;
     }
     

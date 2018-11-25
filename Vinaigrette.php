@@ -10,5 +10,6 @@ class Vinaigrette {
      * @var [] 
      */
     public $composition = [];
+    public $flavouring = null;
     
 }

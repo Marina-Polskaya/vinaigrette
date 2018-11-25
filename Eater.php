@@ -25,11 +25,22 @@ class Eater {
      * Вкусно ли
      */
     public function isTasty() {
-        $isTasty = array_reduce($this->vinaigrette->composition, function($isTasty, $product) {
-            return $isTasty &= $product->isClean && $product->isFresh && $product->isCleanOut && $product->isCuted;
-        });
+        $vegitables = array_filter(
+                $this->vinaigrette->composition,
+                function($compositionItem) {
+                    return is_a($compositionItem, 'Vegetable'); 
+                });
+        $isTasty = array_reduce(
+            $vegitables,
+            function($isTasty, $product) {
+                return $isTasty &= $product->isClean
+                        && $product->isFresh
+                        && $product->isCleanOut
+                        && $product->isCuted;
+            }, true);
         
         echo $isTasty ? "Вкусно" : "Не вкусно";
     }
     
 }
+?>
